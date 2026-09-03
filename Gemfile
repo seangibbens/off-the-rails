@@ -67,9 +67,3 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console", "~> 4.3.0"
 end
-
-group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara", "~> 3.40"
-  gem "selenium-webdriver", "~> 4.48"
-end
