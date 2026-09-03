@@ -3,6 +3,8 @@ require "test_helper"
 class PostsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @post = posts(:one)
+    @user = User.create!(email_address: "reader@example.com", password: SecureRandom.base64(48))
+    get magic_session_url(@user.issue_magic_signin_token!)
   end
 
   test "should get index" do

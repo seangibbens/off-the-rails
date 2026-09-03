@@ -1,0 +1,39 @@
+<% content_for :title, "Welcome" %>
+
+<section class="auth-shell" aria-labelledby="welcome-heading">
+  <div class="auth-art" aria-hidden="true">
+    <div class="auth-art__orb auth-art__orb--coral"></div>
+    <div class="auth-art__orb auth-art__orb--violet"></div>
+    <div class="auth-art__track">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="auth-content">
+    <p class="eyebrow">Off the Rails</p>
+    <h1 id="welcome-heading">A different way<br>to get moving.</h1>
+    <p class="auth-intro">No password to make, remember, or reset. We will send a secure sign-in link to your inbox.</p>
+
+    <% if notice.present? %>
+      <div class="auth-message auth-message--success" role="status"><%= notice %></div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div class="auth-message auth-message--alert" role="alert"><%= alert %></div>
+    <% end %>
+
+    <%= form_with model: @magic_signin, url: magic_signin_path, class: "auth-form" do |form| %>
+      <div class="auth-field">
+        <%= form.label :email_address, "Email address" %>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "email", placeholder: "you@example.com", aria: { describedby: @magic_signin.errors[:email_address].any? ? "email-address-error" : nil } %>
+        <% if @magic_signin.errors[:email_address].any? %>
+          <p id="email-address-error" class="field-error"><%= @magic_signin.errors[:email_address].first %></p>
+        <% end %>
+      </div>
+
+      <%= form.submit "Email me a sign-in link", class: "auth-submit" %>
+    <% end %>
+
+    <p class="auth-fine-print">By continuing, you agree to receive a one-time email for this sign-in.</p>
+  </div>
+</section>

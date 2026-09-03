@@ -64,6 +64,9 @@ group :development, :test do
 end
 
 group :development do
+  # Run the Rails server and Tailwind watcher together in bin/dev.
+  gem "foreman", "~> 0.87.2"
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console", "~> 4.3.0"
 end

@@ -18,13 +18,27 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body data-controller="theme">
+    <button class="theme-toggle" type="button" data-action="theme#toggle" data-theme-target="button">
+      <span aria-hidden="true" class="theme-toggle__mark"></span>
+      <span data-theme-target="label">Switch theme</span>
+    </button>
+
+    <% if authenticated? %>
+      <header class="app-header">
+        <%= link_to "Off the Rails", posts_path, class: "app-wordmark" %>
+        <div class="app-header__actions">
+          <span class="app-header__email"><%= Current.user.email_address %></span>
+          <%= button_to "Sign out", session_path, method: :delete, class: "text-button" %>
+        </div>
+      </header>
+    <% end %>
+
+    <main class="<%= authenticated? ? "app-main" : "auth-main" %>">
       <%= yield %>
     </main>
   </body>

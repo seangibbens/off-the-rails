@@ -111,6 +111,7 @@ GEM
     ffi (1.17.4-arm64-darwin)
     ffi (1.17.4-x86_64-linux-gnu)
     ffi (1.17.4-x86_64-linux-musl)
+    foreman (0.87.2)
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -395,6 +396,7 @@ DEPENDENCIES
   brakeman (~> 8.0.6)
   bundler-audit (~> 0.9.3)
   debug (~> 1.11)
+  foreman (~> 0.87.2)
   image_processing (~> 2.1.0)
   importmap-rails (~> 2.2.3)
   jbuilder (~> 2.15.1)
@@ -417,7 +419,7 @@ DEPENDENCIES
   web-console (~> 4.3.0)
 
 RUBY VERSION
-   ruby 4.0.6p0
+  ruby 4.0.6p0
 
 BUNDLED WITH
-   2.6.9
+  4.0.20
