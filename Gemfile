@@ -40,7 +40,7 @@ gem "kamal", "~> 2.10", require: false
 gem "thruster", "~> 0.1", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 2.0"
 
 # Style with Tailwind CSS [https://tailwindcss.com/]
 gem "tailwindcss-rails", "~> 4.6"
