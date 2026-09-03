@@ -49,4 +49,15 @@ RSpec.describe "Magic sign-ins", type: :request do
 
     expect(response).to redirect_to(new_magic_signin_path)
   end
+
+  it "expires a session after 30 days" do
+    user = User.create!(email_address: "reader@example.com", password: SecureRandom.base64(48))
+    get magic_session_path(user.issue_magic_signin_token!)
+
+    travel 30.days + 1.second do
+      get posts_path
+    end
+
+    expect(response).to redirect_to(new_magic_signin_path)
+  end
 end
