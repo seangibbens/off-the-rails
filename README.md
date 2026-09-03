@@ -2,9 +2,9 @@
 
 > A polished Rails CRUD example for creating, browsing, editing, and deleting posts.
 
-[![CI](https://github.com/seangibbens/off-the-rails/actions/workflows/ci.yml/badge.svg)](https://github.com/seangibbens/off-the-rails/actions/workflows/ci.yml)
-![Ruby 4.0.6](https://img.shields.io/badge/ruby-4.0.6-CC342D?logo=ruby&logoColor=white)
-![Rails 8.1](https://img.shields.io/badge/rails-8.1-D30001?logo=rubyonrails&logoColor=white)
+[![CI](https://github.com/seangibbens/off-the-rails/actions/workflows/ci.yml/badge.svg?&style=for-the-badge)](https://github.com/seangibbens/off-the-rails/actions/workflows/ci.yml)
+![Ruby 4.0.6](https://img.shields.io/badge/ruby-4.0.6-CC342D?logo=ruby&logoColor=white&color=003B57)
+![Rails 8.1](https://img.shields.io/badge/rails-8.1-D30001?logo=rubyonrails&logoColor=white&color=003B57)
 ![SQLite](https://img.shields.io/badge/database-SQLite-003B57?logo=sqlite&logoColor=white)
 
 ## Why This Repo
@@ -22,17 +22,17 @@ Off the Rails is a focused Rails example built around one resource: posts. It de
 
 ## Tech Stack
 
-| Technology | Role |
-| --- | --- |
-| Ruby 4.0.6 | Application runtime |
-| Rails 8.1.3.1 | Web framework |
-| SQLite 2.9.6 | Application database |
-| Puma 8.0.2 | Web server |
-| Hotwire | Turbo navigation and Stimulus behavior |
-| Importmap | JavaScript dependency management |
-| Tailwind CSS 4.6 | Utility-first styling |
-| Solid Cache, Queue, and Cable | Database-backed Rails adapters |
-| Active Storage, Image Processing, and ruby-vips | Image storage and transformations |
+| Technology                                      | Role                                   |
+| ----------------------------------------------- | -------------------------------------- |
+| Ruby 4.0.6                                      | Application runtime                    |
+| Rails 8.1.3.1                                   | Web framework                          |
+| SQLite 2.9.6                                    | Application database                   |
+| Puma 8.0.2                                      | Web server                             |
+| Hotwire                                         | Turbo navigation and Stimulus behavior |
+| Importmap                                       | JavaScript dependency management       |
+| Tailwind CSS 4.6                                | Utility-first styling                  |
+| Solid Cache, Queue, and Cable                   | Database-backed Rails adapters         |
+| Active Storage, Image Processing, and ruby-vips | Image storage and transformations      |
 
 ## Quick Start
 
@@ -84,29 +84,29 @@ The CI workflow runs Ruby and JavaScript dependency audits, RuboCop, Brakeman, a
 
 ## Project Structure
 
-| Directory | Purpose |
-| --- | --- |
-| `app/controllers` | Request handling, including the posts CRUD controller |
-| `app/models` | Active Record models |
-| `app/views` | HTML and JSON presentation |
-| `config` | Application, route, environment, and deployment configuration |
-| `db` | Migrations, schema, and seed data |
-| `spec` | RSpec support and configuration |
-| `test` | Rails test suite |
-| `.github/workflows` | Continuous integration workflow |
+| Directory           | Purpose                                                       |
+| ------------------- | ------------------------------------------------------------- |
+| `app/controllers`   | Request handling, including the posts CRUD controller         |
+| `app/models`        | Active Record models                                          |
+| `app/views`         | HTML and JSON presentation                                    |
+| `config`            | Application, route, environment, and deployment configuration |
+| `db`                | Migrations, schema, and seed data                             |
+| `spec`              | RSpec support and configuration                               |
+| `test`              | Rails test suite                                              |
+| `.github/workflows` | Continuous integration workflow                               |
 
 ## API Surface
 
 The posts resource supports both HTML and JSON representations. Add `.json` to a posts URL to request JSON.
 
-| Method | Path | Purpose |
-| --- | --- | --- |
-| `GET` | `/posts` | List posts |
-| `GET` | `/posts/:id` | Show one post |
-| `POST` | `/posts` | Create a post |
-| `PATCH` or `PUT` | `/posts/:id` | Update a post |
-| `DELETE` | `/posts/:id` | Delete a post |
-| `GET` | `/up` | Application health check |
+| Method           | Path         | Purpose                  |
+| ---------------- | ------------ | ------------------------ |
+| `GET`            | `/posts`     | List posts               |
+| `GET`            | `/posts/:id` | Show one post            |
+| `POST`           | `/posts`     | Create a post            |
+| `PATCH` or `PUT` | `/posts/:id` | Update a post            |
+| `DELETE`         | `/posts/:id` | Delete a post            |
+| `GET`            | `/up`        | Application health check |
 
 ## Deployment
 
