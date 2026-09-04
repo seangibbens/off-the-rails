@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resource :magic_signin, path: "sign-in", only: %i[ new create ]
   get "magic-session/:token", to: "magic_sessions#show", as: :magic_session
   resources :posts
+  get "notes", to: "pages#notes"
+  get "games", to: "pages#games"
+  get "about", to: "pages#about"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -13,5 +16,5 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  root "magic_signins#new"
+  root "home#index"
 end

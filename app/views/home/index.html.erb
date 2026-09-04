@@ -1,0 +1,57 @@
+<% content_for :title, "Home" %>
+
+<section class="home" aria-labelledby="home-heading">
+  <header class="home__header">
+    <p class="eyebrow">Your switchboard</p>
+    <h1 id="home-heading">Pick a track.</h1>
+    <p>Words, diversions, and everything collected along the way.</p>
+  </header>
+
+  <nav class="bento-grid" aria-label="Explore Off the Rails">
+    <%= link_to posts_path, class: "bento-tile bento-tile--posts" do %>
+      <span class="bento-tile__number">01</span>
+      <span class="bento-tile__copy">
+        <span class="bento-tile__eyebrow">Read the latest</span>
+        <span class="bento-tile__title">Posts</span>
+        <span class="bento-tile__description">Notes, ideas, and observations from off the beaten track.</span>
+      </span>
+      <span class="bento-tile__arrow" aria-hidden="true">&#8599;</span>
+      <span class="post-stack" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    <% end %>
+
+    <%= link_to notes_path, class: "bento-tile bento-tile--notes" do %>
+      <span class="bento-tile__number">02</span>
+      <span class="bento-tile__copy">
+        <span class="bento-tile__eyebrow">Capture a thought</span>
+        <span class="bento-tile__title">Notes</span>
+      </span>
+      <span class="bento-tile__arrow" aria-hidden="true">&#8599;</span>
+      <span class="note-scribble" aria-hidden="true"></span>
+    <% end %>
+
+    <%= link_to games_path, class: "bento-tile bento-tile--games" do %>
+      <span class="bento-tile__number">03</span>
+      <span class="bento-tile__copy">
+        <span class="bento-tile__eyebrow">Take a detour</span>
+        <span class="bento-tile__title">Games</span>
+      </span>
+      <span class="bento-tile__arrow" aria-hidden="true">&#8599;</span>
+      <span class="game-dice" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </span>
+    <% end %>
+
+    <%= link_to about_path, class: "bento-tile bento-tile--about" do %>
+      <span class="bento-tile__number">04</span>
+      <span class="bento-tile__copy">
+        <span class="bento-tile__eyebrow">Behind the scenes</span>
+        <span class="bento-tile__title">About</span>
+        <span class="bento-tile__description">The story, tools, and person behind this little corner of the web.</span>
+      </span>
+      <span class="bento-tile__arrow" aria-hidden="true">&#8599;</span>
+      <span class="about-orbit" aria-hidden="true"><span></span></span>
+    <% end %>
+  </nav>
+</section>

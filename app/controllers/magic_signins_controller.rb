@@ -3,7 +3,7 @@ class MagicSigninsController < ApplicationController
   rate_limit to: 5, within: 10.minutes, only: :create, with: -> { redirect_to new_magic_signin_path, alert: "Please wait a few minutes before requesting another link." }
 
   def new
-    return redirect_to posts_path if authenticated?
+    return redirect_to root_path if authenticated?
 
     @magic_signin = MagicSignin.new
   end

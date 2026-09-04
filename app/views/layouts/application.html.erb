@@ -31,7 +31,7 @@
 
     <% if authenticated? %>
       <header class="app-header">
-        <%= link_to "Off the Rails", posts_path, class: "app-wordmark" %>
+        <%= link_to "Off the Rails", root_path, class: "app-wordmark" %>
         <div class="app-header__actions">
           <span class="app-header__email"><%= Current.user.email_address %></span>
           <%= button_to "Sign out", session_path, method: :delete, class: "button button--quiet button--small" %>
