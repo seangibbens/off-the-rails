@@ -42,5 +42,19 @@
     <main class="<%= authenticated? ? "app-main" : "auth-main" %>">
       <%= yield %>
     </main>
+
+    <% if authenticated? %>
+      <footer class="app-footer">
+        <div class="app-footer__intro">
+          <p class="app-footer__name">Your Name</p>
+          <p class="app-footer__bio">Personal info goes here.</p>
+        </div>
+
+        <nav class="app-footer__links" aria-label="Social links">
+          <%= link_to "GitHub ->", "https://github.com/your-handle", class: "app-footer__link" %>
+          <%= link_to "LinkedIn ->", "https://www.linkedin.com/in/your-handle", class: "app-footer__link" %>
+        </nav>
+      </footer>
+    <% end %>
   </body>
 </html>
