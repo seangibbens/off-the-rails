@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Little Character";
+  src: url("LittleCharacterRegular.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 @theme {
-  --font-display: Georgia, "Times New Roman", serif;
+  --font-display: "Little Character", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -34,7 +42,7 @@ body {
   min-height: 100svh;
   background: var(--canvas);
   color: var(--ink);
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-display);
   text-rendering: optimizeLegibility;
 }
 

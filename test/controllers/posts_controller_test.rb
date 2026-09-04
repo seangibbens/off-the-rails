@@ -10,6 +10,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get posts_url
     assert_response :success
+    assert_select "a.back-link[href='#{root_path}']", text: /Back home/
   end
 
   test "should get new" do

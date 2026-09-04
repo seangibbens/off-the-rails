@@ -5,6 +5,11 @@
     <p class="notice notice--success" id="notice" role="status"><%= notice %></p>
   <% end %>
 
+  <%= link_to root_path, class: "back-link" do %>
+    <%= icon_tag "arrow-left" %>
+    <span>Back home</span>
+  <% end %>
+
   <header class="page-header">
     <div>
       <p class="eyebrow">The latest</p>
