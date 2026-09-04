@@ -15,23 +15,23 @@
     <p class="auth-intro">No password to make, remember, or reset. We will send a secure sign-in link to your inbox.</p>
 
     <% if notice.present? %>
-      <div class="auth-message auth-message--success" role="status"><%= notice %></div>
+      <div class="notice notice--success auth-message" role="status"><%= notice %></div>
     <% end %>
 
     <% if alert.present? %>
-      <div class="auth-message auth-message--alert" role="alert"><%= alert %></div>
+      <div class="notice notice--error auth-message" role="alert"><%= alert %></div>
     <% end %>
 
     <%= form_with model: @magic_signin, url: magic_signin_path, class: "auth-form" do |form| %>
-      <div class="auth-field">
-        <%= form.label :email_address, "Email address" %>
-        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "email", placeholder: "you@example.com", aria: { describedby: @magic_signin.errors[:email_address].any? ? "email-address-error" : nil } %>
+      <div class="field auth-field">
+        <%= form.label :email_address, "Email address", class: "field__label" %>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "email", placeholder: "you@example.com", class: "field__input", aria: { describedby: @magic_signin.errors[:email_address].any? ? "email-address-error" : nil } %>
         <% if @magic_signin.errors[:email_address].any? %>
           <p id="email-address-error" class="field-error"><%= @magic_signin.errors[:email_address].first %></p>
         <% end %>
       </div>
 
-      <%= form.submit "Email me a sign-in link", class: "auth-submit" %>
+      <%= form.submit "Email me a sign-in link", class: "button button--primary auth-submit" %>
     <% end %>
 
     <p class="auth-fine-print">By continuing, you agree to receive a one-time email for this sign-in.</p>

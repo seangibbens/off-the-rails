@@ -1,10 +1,20 @@
-<div id="<%= dom_id post %>" class="w-full sm:w-auto my-5 space-y-5">
-  <div>
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= post.title %>
+<article id="<%= dom_id post %>" class="post-row">
+  <div class="post-row__content">
+    <p class="post-meta">
+      <time datetime="<%= post.created_at.iso8601 %>"><%= post.created_at.to_fs(:long) %></time>
+    </p>
+    <h2 class="post-row__title"><%= link_to post.title.presence || "Untitled", post %></h2>
+    <% if post.body.present? %>
+      <p class="post-row__excerpt"><%= truncate(post.body.squish, length: 220) %></p>
+    <% end %>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Body:</strong>
-    <%= post.body %>
+
+  <div class="post-row__actions" aria-label="Actions for <%= post.title.presence || "untitled post" %>">
+    <%= link_to edit_post_path(post), class: "button button--icon button--quiet", aria: { label: "Edit #{post.title.presence || "post"}" } do %>
+      <%= icon_tag "edit" %>
+    <% end %>
+    <%= button_to post, method: :delete, class: "button button--icon button--quiet button--danger-quiet", aria: { label: "Delete #{post.title.presence || "post"}" }, data: { turbo_confirm: "Delete this post? This cannot be undone." } do %>
+      <%= icon_tag "trash" %>
+    <% end %>
   </div>
-</div>
+</article>

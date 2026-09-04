@@ -23,9 +23,10 @@
   </head>
 
   <body data-controller="theme">
-    <button class="theme-toggle" type="button" data-action="theme#toggle" data-theme-target="button">
-      <span aria-hidden="true" class="theme-toggle__mark"></span>
-      <span data-theme-target="label">Switch theme</span>
+    <button class="button button--icon theme-toggle" type="button" data-action="theme#toggle" data-theme-target="button" aria-label="Switch theme">
+      <%= icon_tag "moon", class: "theme-toggle__moon" %>
+      <%= icon_tag "sun", class: "theme-toggle__sun" %>
+      <span class="for-screen-reader" data-theme-target="label">Switch theme</span>
     </button>
 
     <% if authenticated? %>
@@ -33,7 +34,7 @@
         <%= link_to "Off the Rails", posts_path, class: "app-wordmark" %>
         <div class="app-header__actions">
           <span class="app-header__email"><%= Current.user.email_address %></span>
-          <%= button_to "Sign out", session_path, method: :delete, class: "text-button" %>
+          <%= button_to "Sign out", session_path, method: :delete, class: "button button--quiet button--small" %>
         </div>
       </header>
     <% end %>
