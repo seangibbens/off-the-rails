@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: :show
+  before_action :set_owned_post, only: %i[ edit update destroy ]
 
   # GET /posts or /posts.json
   def index
@@ -12,7 +13,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = Current.user.posts.build
   end
 
   # GET /posts/1/edit
@@ -21,7 +22,7 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = Current.user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
@@ -61,6 +62,10 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params.expect(:id))
+    end
+
+    def set_owned_post
+      @post = Current.user.posts.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

@@ -16,14 +16,16 @@
     <div class="post-detail__body"><%= @post.body %></div>
   </article>
 
-  <div class="detail-actions">
-    <%= link_to edit_post_path(@post), class: "button button--quiet" do %>
-      <%= icon_tag "edit" %>
-      <span>Edit post</span>
-    <% end %>
-    <%= button_to @post, method: :delete, class: "button button--danger", data: { turbo_confirm: "Delete this post? This cannot be undone." } do %>
-      <%= icon_tag "trash" %>
-      <span>Delete post</span>
-    <% end %>
-  </div>
+  <% if @post.user_id == Current.user.id %>
+    <div class="detail-actions">
+      <%= link_to edit_post_path(@post), class: "button button--quiet" do %>
+        <%= icon_tag "edit" %>
+        <span>Edit post</span>
+      <% end %>
+      <%= button_to @post, method: :delete, class: "button button--danger", data: { turbo_confirm: "Delete this post? This cannot be undone." } do %>
+        <%= icon_tag "trash" %>
+        <span>Delete post</span>
+      <% end %>
+    </div>
+  <% end %>
 </div>

@@ -33,6 +33,7 @@
 # Ignore agent planning artifacts and execution scratch state.
 /docs/superpowers/
 /.superpowers/
+/.playwright-mcp/
 
 # Ignore key files for decrypting credentials and more.
 /config/*.key

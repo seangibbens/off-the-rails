@@ -9,12 +9,14 @@
     <% end %>
   </div>
 
-  <div class="post-row__actions" aria-label="Actions for <%= post.title.presence || "untitled post" %>">
-    <%= link_to edit_post_path(post), class: "button button--icon button--quiet", aria: { label: "Edit #{post.title.presence || "post"}" } do %>
-      <%= icon_tag "edit" %>
-    <% end %>
-    <%= button_to post, method: :delete, class: "button button--icon button--quiet button--danger-quiet", aria: { label: "Delete #{post.title.presence || "post"}" }, data: { turbo_confirm: "Delete this post? This cannot be undone." } do %>
-      <%= icon_tag "trash" %>
-    <% end %>
-  </div>
+  <% if post.user_id == Current.user.id %>
+    <div class="post-row__actions" aria-label="Actions for <%= post.title.presence || "untitled post" %>">
+      <%= link_to edit_post_path(post), class: "button button--icon button--quiet", aria: { label: "Edit #{post.title.presence || "post"}" } do %>
+        <%= icon_tag "edit" %>
+      <% end %>
+      <%= button_to post, method: :delete, class: "button button--icon button--quiet button--danger-quiet", aria: { label: "Delete #{post.title.presence || "post"}" }, data: { turbo_confirm: "Delete this post? This cannot be undone." } do %>
+        <%= icon_tag "trash" %>
+      <% end %>
+    </div>
+  <% end %>
 </article>
