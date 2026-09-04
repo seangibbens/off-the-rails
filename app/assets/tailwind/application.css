@@ -225,6 +225,9 @@ body {
 .app-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 5.25rem 1.1rem max(1.25rem, calc((100vw - 72rem) / 2)); border-bottom: 1px solid var(--line); }
 .app-wordmark { color: var(--ink); font-family: var(--font-display); font-size: 1.55rem; font-weight: 700; letter-spacing: -0.015em; text-decoration: none; }
 .app-header__actions { display: flex; align-items: center; gap: 1rem; }
+.timezone-indicator { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.78rem; font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.timezone-indicator__icon { --icon-size: 1rem; color: var(--violet); }
+.timezone-indicator__icon[hidden] { display: none; }
 .app-header__email { color: var(--muted); font-size: 0.875rem; }
 .app-main { width: min(100% - 2.5rem, 72rem); margin: clamp(2rem, 5vw, 4rem) auto 4rem; }
 
@@ -360,6 +363,8 @@ body {
   .theme-toggle { top: 0.8rem; right: 0.8rem; }
   .auth-shell { padding-top: 5.5rem; }
   .app-header { min-height: 4.4rem; padding: 0.8rem 4.2rem 0.8rem 1.25rem; }
+  .app-wordmark { white-space: nowrap; }
+  .app-header__actions { gap: 0.75rem; }
   .app-header__email { display: none; }
   .app-main { width: min(100% - 2rem, 72rem); margin-top: 2rem; margin-bottom: 3.5rem; }
   .app-footer { padding: 0.8rem 1rem; }
@@ -391,6 +396,11 @@ body {
   .form-actions .button { width: 100%; }
   .detail-actions { align-items: stretch; flex-direction: column; }
   .detail-actions .button, .detail-actions form { width: 100%; }
+}
+
+@media (max-width: 26rem) {
+  .app-header { display: grid; grid-template-columns: 1fr; gap: 0.5rem; }
+  .app-header__actions { justify-content: space-between; }
 }
 
 @media (prefers-reduced-motion: reduce) {
