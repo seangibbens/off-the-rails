@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :body, class: "field__label" %>
-    <%= form.textarea :body, rows: 10, class: ["field__input field__textarea", { "field__input--invalid": post.errors[:body].any? }], placeholder: "Write what is on your mind..." %>
+    <%= form.rich_text_area :body, rows: 10, class: ["lexxy-content post-form__editor", { "post-form__editor--invalid": post.errors[:body].any? }], placeholder: "Write what is on your mind..." %>
   </div>
 
   <div class="form-actions">

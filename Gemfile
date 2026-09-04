@@ -19,6 +19,9 @@ gem "stimulus-rails", "~> 1.3.4"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder", "~> 2.15.1"
 
+# Edit rich text with Action Text and Lexxy [https://lexxy.dev/]
+gem "lexxy", "~> 0.9.21"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.22"
 

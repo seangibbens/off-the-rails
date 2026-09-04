@@ -5,7 +5,7 @@
     </p>
     <h2 class="post-row__title"><%= link_to post.title.presence || "Untitled", post %></h2>
     <% if post.body.present? %>
-      <p class="post-row__excerpt"><%= truncate(post.body.squish, length: 220) %></p>
+      <p class="post-row__excerpt"><%= truncate(post.body.to_plain_text.squish, length: 220) %></p>
     <% end %>
   </div>
 

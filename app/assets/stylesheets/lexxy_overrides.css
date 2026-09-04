@@ -1,0 +1,28 @@
+.lexxy-content {
+  --lexxy-color-ink: var(--ink);
+  --lexxy-color-ink-medium: var(--muted);
+  --lexxy-color-ink-light: color-mix(in srgb, var(--muted) 72%, transparent);
+  --lexxy-color-ink-lighter: var(--line);
+  --lexxy-color-ink-lightest: color-mix(in srgb, var(--violet) 8%, var(--surface));
+  --lexxy-color-ink-inverted: var(--surface);
+  --lexxy-color-canvas: var(--surface);
+  --lexxy-color-text: var(--ink);
+  --lexxy-color-text-subtle: var(--muted);
+  --lexxy-color-link: var(--violet);
+  --lexxy-color-selected: color-mix(in srgb, var(--violet) 16%, var(--surface));
+  --lexxy-color-selected-hover: color-mix(in srgb, var(--violet) 24%, var(--surface));
+  --lexxy-color-selected-dark: var(--violet);
+  --lexxy-color-code-bg: color-mix(in srgb, var(--canvas) 82%, var(--surface));
+  --lexxy-color-table-header-bg: color-mix(in srgb, var(--violet) 8%, var(--surface));
+  --lexxy-color-table-cell-border: var(--line);
+  --lexxy-focus-ring-color: var(--violet);
+  --lexxy-radius: 0.75rem;
+}
+
+.post-form__editor {
+  box-shadow: inset 0 1px 2px rgb(40 35 28 / 0.04);
+}
+
+.post-form__editor--invalid {
+  border-color: var(--coral);
+}
