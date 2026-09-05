@@ -1,0 +1,79 @@
+<% content_for :title, "Lotto" %>
+<% max_number = @play&.max_number || @progress.current_max_number %>
+
+<section class="lotto <%= "lotto--complete" if @play %>"
+  aria-labelledby="lotto-heading"
+  data-controller="lotto"
+  data-lotto-max-number-value="<%= max_number %>"
+  data-lotto-played-value="<%= @play.present? %>">
+  <%= link_to "<- All games", games_path, class: "back-link" %>
+
+  <header class="lotto__header">
+    <div>
+      <p class="eyebrow">Daily draw / Level <span data-lotto-target="level"><%= @progress.current_max_number %></span></p>
+      <h1 id="lotto-heading">Pick it.<br>Spin it.</h1>
+    </div>
+    <div class="lotto__rules">
+      <p>Choose one number from <strong>1 to <%= max_number %></strong>. Match the wheel and tomorrow's range grows.</p>
+      <p class="lotto__reset">One spin daily. Resets at midnight Eastern.</p>
+    </div>
+  </header>
+
+  <% if alert.present? %>
+    <div class="notice notice--error" role="alert"><%= alert %></div>
+  <% end %>
+
+  <div class="lotto__stage">
+    <div class="lotto-wheel-wrap">
+      <span class="lotto-wheel__pointer" aria-hidden="true"></span>
+      <div class="lotto-wheel <%= "lotto-wheel--dense" if max_number > 20 %>" data-lotto-target="wheel" style="--segment-count: <%= max_number %>">
+        <div class="lotto-wheel__face">
+          <% (1..max_number).each do |number| %>
+            <span class="lotto-wheel__number" style="--number-index: <%= number - 1 %>"><%= number %></span>
+          <% end %>
+        </div>
+      </div>
+      <div class="lotto-wheel__hub" aria-hidden="true">
+        <span data-lotto-target="display"><%= @play&.drawn_number || "?" %></span>
+      </div>
+    </div>
+
+    <div class="lotto-console">
+      <% if @play %>
+        <div class="lotto-result <%= @play.won? ? "lotto-result--win" : "lotto-result--loss" %>" data-lotto-target="resultPanel">
+          <p class="lotto-result__kicker"><%= @play.won? ? "Winner!" : "Not this time" %></p>
+          <p class="lotto-result__numbers">You picked <strong><%= @play.chosen_number %></strong>. The wheel found <strong><%= @play.drawn_number %></strong>.</p>
+          <p><%= @play.won? ? "Level #{@progress.current_max_number} is waiting for you tomorrow." : "Your level holds at #{@progress.current_max_number}. Try again tomorrow." %></p>
+        </div>
+      <% else %>
+        <div class="lotto-result" data-lotto-target="resultPanel" hidden>
+          <p class="lotto-result__kicker" data-lotto-target="resultKicker"></p>
+          <p class="lotto-result__numbers" data-lotto-target="resultNumbers"></p>
+          <p data-lotto-target="resultMessage"></p>
+        </div>
+      <% end %>
+
+      <%= form_with url: games_lotto_play_path, class: "lotto-form", data: { lotto_target: "form", action: "submit->lotto#spin" } do |form| %>
+        <label for="chosen_number">Your lucky number</label>
+        <div class="lotto-picker">
+          <button type="button" aria-label="Previous number" data-action="lotto#decrement" <%= "disabled" if @play %>>-</button>
+          <%= select_tag :chosen_number,
+            options_for_select((1..max_number).to_a, @play&.chosen_number || 1),
+            disabled: @play.present?,
+            data: { lotto_target: "selector", action: "change->lotto#choose" },
+            aria: { describedby: "lotto-status" } %>
+          <button type="button" aria-label="Next number" data-action="lotto#increment" <%= "disabled" if @play %>>+</button>
+        </div>
+        <%= form.submit @play ? "Played today" : "Spin the wheel", class: "lotto-form__submit", disabled: @play.present?, data: { lotto_target: "submit" } %>
+      <% end %>
+
+      <p id="lotto-status" class="lotto-status" aria-live="polite" data-lotto-target="status">
+        <%= @play ? "Today's spin is complete." : "Choose a number, then spin." %>
+      </p>
+    </div>
+  </div>
+
+  <div class="lotto-celebration" data-lotto-target="celebration" aria-hidden="true" hidden>
+    <% 28.times do %><i></i><% end %>
+  </div>
+</section>

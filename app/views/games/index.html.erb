@@ -1,0 +1,39 @@
+<% content_for :title, "Games" %>
+
+<section class="games-index" aria-labelledby="games-heading">
+  <%= link_to "<- Home", root_path, class: "back-link" %>
+
+  <header class="games-index__header">
+    <div>
+      <p class="eyebrow">Daily departures</p>
+      <h1 id="games-heading">Pick your play.</h1>
+    </div>
+    <p>One small challenge each day. Come back after midnight Eastern for another go.</p>
+  </header>
+
+  <div class="game-shelf">
+    <%= link_to games_lotto_path, class: "game-card game-card--lotto" do %>
+      <span class="game-card__topline">
+        <span class="game-card__number">Game 001</span>
+        <span class="game-card__status"><%= @lotto_play ? "Played today" : "Ready to play" %></span>
+      </span>
+      <span class="game-card__copy">
+        <span class="game-card__eyebrow">Daily draw</span>
+        <span class="game-card__title">Lotto</span>
+        <span class="game-card__description">Choose your number. Spin the wheel. Beat the odds and make tomorrow harder.</span>
+      </span>
+      <span class="game-card__level">Level <%= @lotto_progress&.current_max_number || 2 %></span>
+      <span class="game-card__wheel" aria-hidden="true"><span>?</span></span>
+      <span class="game-card__arrow" aria-hidden="true">&#8599;</span>
+    <% end %>
+
+    <article class="game-card game-card--next">
+      <span class="game-card__number">Next stop</span>
+      <div>
+        <p class="eyebrow">More games</p>
+        <h2>Track under construction.</h2>
+      </div>
+      <span class="game-card--next__mark" aria-hidden="true">+</span>
+    </article>
+  </div>
+</section>

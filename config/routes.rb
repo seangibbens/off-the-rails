@@ -11,7 +11,12 @@ Rails.application.routes.draw do
     resources :posts, only: :destroy
   end
   get "chat", to: "pages#chat"
-  get "games", to: "pages#games"
+  resources :games, only: :index
+  namespace :games do
+    resource :lotto, only: :show, controller: "lottos" do
+      resource :play, only: :create, controller: "lotto_plays"
+    end
+  end
   get "about", to: "pages#about"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_04_230000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_05_000000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -49,6 +49,31 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_04_230000) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "lotto_plays", force: :cascade do |t|
+    t.integer "chosen_number", null: false
+    t.datetime "created_at", null: false
+    t.integer "drawn_number", null: false
+    t.integer "max_number", null: false
+    t.date "played_on", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.boolean "won", null: false
+    t.index ["user_id", "played_on"], name: "index_lotto_plays_on_user_id_and_played_on", unique: true
+    t.index ["user_id"], name: "index_lotto_plays_on_user_id"
+    t.check_constraint "chosen_number BETWEEN 1 AND max_number", name: "lotto_plays_chosen_number_range"
+    t.check_constraint "drawn_number BETWEEN 1 AND max_number", name: "lotto_plays_drawn_number_range"
+    t.check_constraint "max_number BETWEEN 2 AND 100", name: "lotto_plays_max_number_range"
+  end
+
+  create_table "lotto_progresses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "current_max_number", default: 2, null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_lotto_progresses_on_user_id", unique: true
+    t.check_constraint "current_max_number BETWEEN 2 AND 100", name: "lotto_progresses_current_max_number_range"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "title"
@@ -81,6 +106,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_04_230000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "lotto_plays", "users"
+  add_foreign_key "lotto_progresses", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "sessions", "users"
 end
