@@ -1,7 +1,12 @@
 one:
   email_address: owner@example.com
   password_digest: <%= BCrypt::Password.create("password") %>
+  is_admin: true
+  username: owner
+  avatar_key: orbit
 
 two:
   email_address: other@example.com
   password_digest: <%= BCrypt::Password.create("password") %>
+  username: other
+  avatar_key: comet

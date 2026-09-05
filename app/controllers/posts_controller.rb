@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.includes(:user).with_rich_text_body
   end
 
   # GET /posts/1 or /posts/1.json

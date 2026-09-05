@@ -8,8 +8,20 @@
   </header>
 
   <nav class="bento-grid" aria-label="Explore Off the Rails">
-    <%= link_to posts_path, class: "bento-tile bento-tile--posts" do %>
+    <%= link_to games_path, class: "bento-tile bento-tile--games" do %>
       <span class="bento-tile__number">01</span>
+      <span class="bento-tile__copy">
+        <span class="bento-tile__eyebrow">Take a detour</span>
+        <span class="bento-tile__title">Games</span>
+      </span>
+      <span class="bento-tile__arrow" aria-hidden="true">&#8599;</span>
+      <span class="game-dice" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </span>
+    <% end %>
+
+    <%= link_to posts_path, class: "bento-tile bento-tile--posts" do %>
+      <span class="bento-tile__number">02</span>
       <span class="bento-tile__copy">
         <span class="bento-tile__eyebrow">Read the latest</span>
         <span class="bento-tile__title">Posts</span>
@@ -21,25 +33,15 @@
       </span>
     <% end %>
 
-    <%= link_to notes_path, class: "bento-tile bento-tile--notes" do %>
-      <span class="bento-tile__number">02</span>
-      <span class="bento-tile__copy">
-        <span class="bento-tile__eyebrow">Capture a thought</span>
-        <span class="bento-tile__title">Notes</span>
-      </span>
-      <span class="bento-tile__arrow" aria-hidden="true">&#8599;</span>
-      <span class="note-scribble" aria-hidden="true"></span>
-    <% end %>
-
-    <%= link_to games_path, class: "bento-tile bento-tile--games" do %>
+    <%= link_to chat_path, class: "bento-tile bento-tile--chat" do %>
       <span class="bento-tile__number">03</span>
       <span class="bento-tile__copy">
-        <span class="bento-tile__eyebrow">Take a detour</span>
-        <span class="bento-tile__title">Games</span>
+        <span class="bento-tile__eyebrow">Start a conversation</span>
+        <span class="bento-tile__title">Chat</span>
       </span>
       <span class="bento-tile__arrow" aria-hidden="true">&#8599;</span>
-      <span class="game-dice" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span>
+      <span class="chat-bubbles" aria-hidden="true">
+        <span></span><span></span>
       </span>
     <% end %>
 

@@ -1,0 +1,54 @@
+<% content_for :title, "Edit profile" %>
+
+<section class="profile-editor" aria-labelledby="profile-editor-heading">
+  <%= link_to profile_path, class: "back-link" do %>
+    <%= icon_tag "arrow-left" %>
+    <span>Back to profile</span>
+  <% end %>
+
+  <header class="editor-header">
+    <p class="eyebrow">Make it yours</p>
+    <h1 id="profile-editor-heading">Edit profile</h1>
+    <p>Choose how you show up around Off the Rails. Your email stays private.</p>
+  </header>
+
+  <% if @user.errors.any? %>
+    <div class="notice notice--error" role="alert">
+      <h2><%= pluralize(@user.errors.count, "error") %> stopped this profile from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: @user, url: profile_path, class: "profile-form" do |form| %>
+    <div class="field">
+      <%= form.label :username, class: "field__label" %>
+      <div class="profile-form__username">
+        <span aria-hidden="true">@</span>
+        <%= form.text_field :username, required: true, autofocus: true, minlength: 3, maxlength: 30, autocomplete: "username", class: "field__input", aria: { describedby: "username-hint" } %>
+      </div>
+      <p id="username-hint" class="field-hint">3-30 lowercase letters, numbers, hyphens, or underscores.</p>
+    </div>
+
+    <fieldset class="avatar-picker">
+      <legend>Choose an avatar</legend>
+      <div class="avatar-picker__grid">
+        <% User::AVATARS.each do |key, label| %>
+          <label class="avatar-choice">
+            <%= form.radio_button :avatar_key, key %>
+            <span class="avatar-choice__art"><%= image_tag "avatars/#{key}.svg", alt: "" %></span>
+            <span class="avatar-choice__label"><%= label %></span>
+          </label>
+        <% end %>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <%= form.submit "Save profile", class: "button button--primary" %>
+      <%= link_to "Cancel", profile_path, class: "button button--quiet" %>
+    </div>
+  <% end %>
+</section>

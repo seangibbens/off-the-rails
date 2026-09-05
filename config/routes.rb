@@ -2,8 +2,15 @@ Rails.application.routes.draw do
   resource :session, only: :destroy
   resource :magic_signin, path: "sign-in", only: %i[ new create ]
   get "magic-session/:token", to: "magic_sessions#show", as: :magic_session
+  resource :profile, only: %i[ show edit update ]
+  resources :users, only: :show, param: :username
   resources :posts
-  get "notes", to: "pages#notes"
+  namespace :admin do
+    root "dashboard#index"
+    resources :users, only: %i[ update destroy ]
+    resources :posts, only: :destroy
+  end
+  get "chat", to: "pages#chat"
   get "games", to: "pages#games"
   get "about", to: "pages#about"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

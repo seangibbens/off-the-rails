@@ -2,6 +2,8 @@
   <div class="post-row__content">
     <p class="post-meta">
       <time datetime="<%= post.created_at.iso8601 %>"><%= post.created_at.to_fs(:long) %></time>
+      <span aria-hidden="true">/</span>
+      <%= link_to post.user.username, user_path(post.user.username) %>
     </p>
     <h2 class="post-row__title"><%= link_to post.title.presence || "Untitled", post %></h2>
     <% if post.body.present? %>

@@ -6,11 +6,11 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get magic_session_url(user.issue_magic_signin_token!)
   end
 
-  test "shows the notes placeholder" do
-    get notes_url
+  test "shows the chat placeholder" do
+    get chat_url
 
     assert_response :success
-    assert_select "h1", text: "Notes"
+    assert_select "h1", text: "Chat"
   end
 
   test "shows the games placeholder" do
@@ -30,7 +30,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   test "requires authentication" do
     delete session_url
 
-    get notes_url
+    get chat_url
 
     assert_redirected_to new_magic_signin_url
   end

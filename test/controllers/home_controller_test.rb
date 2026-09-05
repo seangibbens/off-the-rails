@@ -11,10 +11,10 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1", text: "Pick a track."
-    assert_select ".bento-grid a[href='#{posts_path}']", text: /Posts/
-    assert_select ".bento-grid a[href='#{notes_path}']", text: /Notes/
-    assert_select ".bento-grid a[href='#{games_path}']", text: /Games/
-    assert_select ".bento-grid a[href='#{about_path}']", text: /About/
+    assert_select ".bento-grid > a:nth-child(1)[href='#{games_path}']", text: /Games/
+    assert_select ".bento-grid > a:nth-child(2)[href='#{posts_path}']", text: /Posts/
+    assert_select ".bento-grid > a:nth-child(3)[href='#{chat_path}']", text: /Chat/
+    assert_select ".bento-grid > a:nth-child(4)[href='#{about_path}']", text: /About/
     assert_select ".timezone-indicator[data-controller='timezone']" do
       assert_select "[data-timezone-target='sun']"
       assert_select "[data-timezone-target='moon']"
@@ -33,5 +33,17 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_redirected_to new_magic_signin_url
+  end
+
+  test "shows the admin link only to admins" do
+    get root_url
+
+    assert_select "a[href='#{admin_root_path}']", count: 0
+
+    delete session_url
+    get magic_session_url(users(:one).issue_magic_signin_token!)
+    get root_url
+
+    assert_select "a[href='#{admin_root_path}']", text: "Admin"
   end
 end

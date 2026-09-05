@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  def notes
+  def chat
   end
 
   def games

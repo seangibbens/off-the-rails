@@ -12,6 +12,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get posts_url
     assert_response :success
     assert_select "a.back-link[href='#{root_path}']", text: /Back home/
+    assert_select "#post_#{@post.id} .post-meta a[href='#{user_path(@user.username)}']", text: @user.username
   end
 
   test "should get new" do
@@ -37,6 +38,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get post_url(@post)
     assert_response :success
     assert_select ".post-detail__body .lexxy-content", text: /MyText/
+    assert_select ".post-detail .post-meta a[href='#{user_path(@user.username)}']", text: @user.username
   end
 
   test "should show another user's post without write controls" do

@@ -1,0 +1,104 @@
+<% content_for :title, "Admin" %>
+
+<section class="admin" aria-labelledby="admin-heading">
+  <% if notice.present? %>
+    <p class="notice notice--success" role="status"><%= notice %></p>
+  <% end %>
+  <% if alert.present? %>
+    <p class="notice notice--error" role="alert"><%= alert %></p>
+  <% end %>
+
+  <%= link_to root_path, class: "back-link" do %>
+    <%= icon_tag "arrow-left" %>
+    <span>Back home</span>
+  <% end %>
+
+  <header class="admin__header">
+    <div>
+      <p class="eyebrow">Control room</p>
+      <h1 id="admin-heading">Admin</h1>
+      <p>Manage the people and publishing activity across Off the Rails.</p>
+    </div>
+    <dl class="admin__stats" aria-label="Site totals">
+      <div><dt>Users</dt><dd><%= @users.size %></dd></div>
+      <div><dt>Posts</dt><dd><%= @posts.size %></dd></div>
+    </dl>
+  </header>
+
+  <section class="admin-panel" aria-labelledby="users-heading">
+    <header class="admin-panel__header">
+      <div>
+        <p class="eyebrow">Access</p>
+        <h2 id="users-heading">Users</h2>
+      </div>
+      <span class="admin-panel__count"><%= pluralize(@users.size, "account") %></span>
+    </header>
+
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr><th scope="col">Email</th><th scope="col">Role</th><th scope="col">Posts</th><th scope="col">Joined</th><th scope="col"><span class="for-screen-reader">Actions</span></th></tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr id="<%= dom_id(user) %>">
+              <td data-label="Email"><strong><%= user.email_address %></strong><%= tag.span "You", class: "admin-badge admin-badge--you" if user == Current.user %></td>
+              <td data-label="Role">
+                <% if user == Current.user %>
+                  <span class="admin-badge admin-badge--admin">Admin</span>
+                <% else %>
+                  <%= form_with model: [ :admin, user ], class: "admin-role-form" do |form| %>
+                    <%= form.select :is_admin, [["Admin", true], ["Member", false]], {}, aria: { label: "Role for #{user.email_address}" } %>
+                    <%= form.submit "Save", class: "button button--small button--quiet" %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td data-label="Posts"><%= user.posts.size %></td>
+              <td data-label="Joined"><time datetime="<%= user.created_at.iso8601 %>"><%= user.created_at.to_date.to_fs(:long) %></time></td>
+              <td class="admin-table__actions">
+                <% unless user == Current.user %>
+                  <%= button_to "Delete", admin_user_path(user), method: :delete, class: "button button--small button--danger-quiet", data: { turbo_confirm: "Delete #{user.email_address} and all of their posts? This cannot be undone." } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="admin-panel" aria-labelledby="admin-posts-heading">
+    <header class="admin-panel__header">
+      <div>
+        <p class="eyebrow">Publishing</p>
+        <h2 id="admin-posts-heading">Posts</h2>
+      </div>
+      <span class="admin-panel__count"><%= pluralize(@posts.size, "post") %></span>
+    </header>
+
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr><th scope="col">Title</th><th scope="col">Author</th><th scope="col">Published</th><th scope="col"><span class="for-screen-reader">Actions</span></th></tr>
+        </thead>
+        <tbody>
+          <% if @posts.any? %>
+            <% @posts.each do |post| %>
+              <tr id="admin_<%= dom_id(post) %>">
+                <td data-label="Title"><strong><%= link_to post.title.presence || "Untitled", post_path(post) %></strong></td>
+                <td data-label="Author"><%= post.user.email_address %></td>
+                <td data-label="Published"><time datetime="<%= post.created_at.iso8601 %>"><%= post.created_at.to_date.to_fs(:long) %></time></td>
+                <td class="admin-table__actions">
+                  <%= link_to "View", post_path(post), class: "button button--small button--quiet" %>
+                  <%= button_to "Delete", admin_post_path(post), method: :delete, class: "button button--small button--danger-quiet", data: { turbo_confirm: "Delete #{post.title.presence || "this post"}? This cannot be undone." } %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr><td colspan="4" class="admin-table__empty">No posts have been published yet.</td></tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>

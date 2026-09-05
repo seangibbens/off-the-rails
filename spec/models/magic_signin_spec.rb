@@ -5,7 +5,7 @@ RSpec.describe MagicSignin, type: :model do
     signup = described_class.new(email_address: "  Reader@Example.COM ")
 
     expect(signup.save).to be(true)
-    expect(signup.user).to have_attributes(email_address: "reader@example.com")
+    expect(signup.user).to have_attributes(email_address: "reader@example.com", username: "reader", avatar_key: "orbit")
     expect(signup.user.password_digest).to be_present
   end
 

@@ -1,0 +1,101 @@
+<% content_for :title, "#{@user.username} - Profile" %>
+
+<section class="profile" aria-labelledby="profile-heading">
+  <% if notice.present? %>
+    <p class="notice notice--success" role="status"><%= notice %></p>
+  <% end %>
+
+  <%= link_to root_path, class: "back-link" do %>
+    <%= icon_tag "arrow-left" %>
+    <span>Back home</span>
+  <% end %>
+
+  <header class="profile-hero">
+    <div class="profile-hero__avatar">
+      <%= avatar_tag @user, class: "avatar--hero", alt: "#{@user.username}'s avatar" %>
+      <span aria-hidden="true"><%= @posts.size.to_s.rjust(2, "0") %></span>
+    </div>
+
+    <div class="profile-hero__identity">
+      <p class="eyebrow"><%= @user == Current.user ? "Your profile" : "Member profile" %></p>
+      <h1 id="profile-heading"><%= @user.username %></h1>
+      <p>On the rails since <time datetime="<%= @user.created_at.to_date.iso8601 %>"><%= @user.created_at.to_date.to_fs(:long) %></time>.</p>
+    </div>
+
+    <% if @user == Current.user %>
+      <%= link_to edit_profile_path, class: "button button--primary profile-hero__edit" do %>
+        <%= icon_tag "edit" %>
+        <span>Edit profile</span>
+      <% end %>
+    <% end %>
+  </header>
+
+  <dl class="profile-stats" aria-label="Profile stats">
+    <div class="profile-stat profile-stat--violet">
+      <dt>Posts</dt>
+      <dd><%= @posts.size %></dd>
+    </div>
+    <div class="profile-stat profile-stat--lime">
+      <dt>Achievements</dt>
+      <dd>0</dd>
+    </div>
+    <div class="profile-stat profile-stat--coral">
+      <dt>Games logged</dt>
+      <dd>0</dd>
+    </div>
+    <div class="profile-stat">
+      <dt>Member since</dt>
+      <dd><%= @user.created_at.year %></dd>
+    </div>
+  </dl>
+
+  <div class="profile-grid">
+    <section class="profile-panel profile-panel--posts" aria-labelledby="profile-posts-heading">
+      <header class="profile-panel__header">
+        <div>
+          <p class="eyebrow">From the notebook</p>
+          <h2 id="profile-posts-heading">Posts</h2>
+        </div>
+        <span><%= pluralize(@posts.size, "post") %></span>
+      </header>
+
+      <% if @posts.any? %>
+        <div class="profile-posts">
+          <% @posts.each do |post| %>
+            <article class="profile-post">
+              <time datetime="<%= post.created_at.iso8601 %>"><%= post.created_at.to_date.to_fs(:long) %></time>
+              <h3><%= link_to post.title.presence || "Untitled", post_path(post) %></h3>
+              <% if post.body.present? %>
+                <p><%= truncate(post.body.to_plain_text.squish, length: 150) %></p>
+              <% end %>
+            </article>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="profile-panel__empty">
+          <strong>No posts yet</strong>
+          <p>This stretch of track is still waiting for its first dispatch.</p>
+          <%= link_to "Write the first post", new_post_path, class: "button button--small" if @user == Current.user %>
+        </div>
+      <% end %>
+    </section>
+
+    <section class="profile-panel profile-panel--achievement" aria-labelledby="achievements-heading">
+      <p class="profile-panel__number" aria-hidden="true">01</p>
+      <div>
+        <p class="eyebrow">Milestones</p>
+        <h2 id="achievements-heading">Achievements</h2>
+        <p>Badges and memorable moments will collect here as the journey grows.</p>
+      </div>
+    </section>
+
+    <section class="profile-panel profile-panel--games" aria-labelledby="game-history-heading">
+      <div class="profile-panel__pips" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div>
+        <p class="eyebrow">Past diversions</p>
+        <h2 id="game-history-heading">Game history</h2>
+        <p>Completed games, high scores, and close calls will appear here.</p>
+      </div>
+    </section>
+  </div>
+</section>

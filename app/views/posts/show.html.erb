@@ -11,7 +11,11 @@
   <% end %>
 
   <article class="post-detail">
-    <p class="post-meta"><time datetime="<%= @post.created_at.iso8601 %>"><%= @post.created_at.to_fs(:long) %></time></p>
+    <p class="post-meta">
+      <time datetime="<%= @post.created_at.iso8601 %>"><%= @post.created_at.to_fs(:long) %></time>
+      <span aria-hidden="true">/</span>
+      <%= link_to @post.user.username, user_path(@post.user.username) %>
+    </p>
     <h1><%= @post.title.presence || "Untitled" %></h1>
     <div class="post-detail__body"><%= @post.body %></div>
   </article>

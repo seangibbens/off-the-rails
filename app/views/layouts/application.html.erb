@@ -33,12 +33,16 @@
       <header class="app-header">
         <%= link_to "Off the Rails", root_path, class: "app-wordmark" %>
         <div class="app-header__actions">
+          <%= link_to "Admin", admin_root_path, class: "button button--quiet button--small" if Current.user.is_admin? %>
           <div class="timezone-indicator" data-controller="timezone" aria-label="Detecting your timezone">
             <%= icon_tag "sun", class: "timezone-indicator__icon", data: { timezone_target: "sun" }, hidden: true %>
             <%= icon_tag "moon", class: "timezone-indicator__icon", data: { timezone_target: "moon" }, hidden: true %>
             <span data-timezone-target="label">Local time</span>
           </div>
-          <span class="app-header__email"><%= Current.user.email_address %></span>
+          <%= link_to profile_path, class: "app-profile-link", aria: { label: "View your profile" } do %>
+            <%= avatar_tag Current.user, class: "avatar--header" %>
+            <span><%= Current.user.username %></span>
+          <% end %>
           <%= button_to "Sign out", session_path, method: :delete, class: "button button--quiet button--small" %>
         </div>
       </header>

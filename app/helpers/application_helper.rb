@@ -11,4 +11,11 @@ module ApplicationHelper
 
     tag.span(class: classes, **options)
   end
+
+  def avatar_tag(user, **options)
+    classes = [ "avatar", options.delete(:class) ].compact
+    options[:alt] = "" unless options.key?(:alt)
+
+    image_tag "avatars/#{user.avatar_key}.svg", class: classes, **options
+  end
 end

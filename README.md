@@ -13,7 +13,8 @@ Off the Rails is a focused Rails example built around an authenticated personal 
 
 ## Highlights
 
-- Responsive bento-grid home page linking to Posts, Notes, Games, and About
+- Responsive bento-grid home page linking to Games, Posts, Chat, and About
+- Authenticated member profiles with editable usernames and preset avatars
 - Passwordless email sign-in with single-use links and 30-day sessions
 - Full posts CRUD flow with Lexxy and Action Text rich-text editing
 - Server-rendered HTML views with Turbo-enhanced navigation
@@ -113,18 +114,22 @@ The CI workflow runs Ruby and JavaScript dependency audits, RuboCop, Brakeman, a
 
 The dashboard and placeholder sections are authenticated HTML pages. The posts resource supports both HTML and JSON representations; add `.json` to a posts URL to request JSON.
 
-| Method           | Path         | Purpose                            |
-| ---------------- | ------------ | ---------------------------------- |
-| `GET`            | `/`          | Show the authenticated bento home  |
-| `GET`            | `/notes`     | Show the Notes placeholder          |
-| `GET`            | `/games`     | Show the Games placeholder          |
-| `GET`            | `/about`     | Show the About placeholder          |
-| `GET`            | `/posts`     | List posts                          |
-| `GET`            | `/posts/:id` | Show one post                       |
-| `POST`           | `/posts`     | Create a post                       |
-| `PATCH` or `PUT` | `/posts/:id` | Update a post                       |
-| `DELETE`         | `/posts/:id` | Delete a post                       |
-| `GET`            | `/up`        | Application health check            |
+| Method           | Path               | Purpose                             |
+| ---------------- | ------------------ | ----------------------------------- |
+| `GET`            | `/`                | Show the authenticated bento home   |
+| `GET`            | `/chat`            | Show the Chat placeholder            |
+| `GET`            | `/games`           | Show the Games placeholder           |
+| `GET`            | `/about`           | Show the About placeholder           |
+| `GET`            | `/posts`           | List posts                           |
+| `GET`            | `/posts/:id`       | Show one post                        |
+| `GET`            | `/profile`         | Show the signed-in member's profile  |
+| `GET`            | `/profile/edit`    | Edit the signed-in member's profile  |
+| `GET`            | `/users/:username` | Show a member profile                |
+| `PATCH` or `PUT` | `/profile`         | Update username and avatar           |
+| `POST`           | `/posts`           | Create a post                        |
+| `PATCH` or `PUT` | `/posts/:id`       | Update a post                        |
+| `DELETE`         | `/posts/:id`       | Delete a post                        |
+| `GET`            | `/up`              | Application health check             |
 
 ## Deployment
 
