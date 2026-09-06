@@ -226,9 +226,6 @@ body {
 .app-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 5.25rem 1.1rem max(1.25rem, calc((100vw - 72rem) / 2)); border-bottom: 1px solid var(--line); }
 .app-wordmark { color: var(--ink); font-family: var(--font-display); font-size: 1.55rem; font-weight: 700; letter-spacing: -0.015em; text-decoration: none; }
 .app-header__actions { display: flex; align-items: center; gap: 1rem; }
-.timezone-indicator { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.78rem; font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
-.timezone-indicator__icon { --icon-size: 1rem; color: var(--violet); }
-.timezone-indicator__icon[hidden] { display: none; }
 .app-header__email { color: var(--muted); font-size: 0.875rem; }
 .app-profile-link { display: inline-flex; align-items: center; gap: 0.55rem; border-radius: 999px; color: var(--ink); font-size: 0.82rem; font-weight: 800; text-decoration: none; }
 .app-profile-link:hover { color: var(--violet); }
