@@ -87,6 +87,9 @@ bin/importmap audit
 
 # Prepare the database
 bin/rails db:prepare
+
+# Reset the development database to an empty schema
+db/teardown
 ```
 
 Run the full local CI suite with:

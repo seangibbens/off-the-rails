@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+set -eu
+
+if [ "${RAILS_ENV:-development}" != "development" ]; then
+  printf '%s\n' "db/teardown only runs in the development environment." >&2
+  exit 1
+fi
+
+exec rbenv exec bin/rails db:drop db:create db:schema:load
