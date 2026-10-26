@@ -20,7 +20,7 @@ gem "stimulus-rails", "~> 1.3.4"
 gem "jbuilder", "~> 2.15.1"
 
 # Edit rich text with Action Text and Lexxy [https://lexxy.dev/]
-gem "lexxy", "~> 0.9.21"
+gem "lexxy", "~> 1.0.1"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.22"
