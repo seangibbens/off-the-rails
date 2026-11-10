@@ -47,7 +47,7 @@ gem "image_processing", "~> 2.1.0"
 gem "ruby-vips", "~> 2.3.0"
 
 # Style with Tailwind CSS [https://tailwindcss.com/]
-gem "tailwindcss-rails", "~> 4.6"
+gem "tailwindcss-rails", "~> 4.7"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
